@@ -1,16 +1,22 @@
 public class Singleton {
 
+    private static Singleton instance = null;
+
     private Singleton() {
         System.out.println("Inside Singleton constructor");
     }
 
-    private static class SingletonHelper {
-
-        private static final Singleton INSTANCE = new Singleton();
-    }
-
     public static Singleton getInstance() {
 
-        return SingletonHelper.INSTANCE;
+        if(instance==null){
+
+            synchronized (Singleton.class){
+
+                if(instance == null)
+                    instance = new Singleton();
+            }
+        }
+
+        return instance;
     }
 }
