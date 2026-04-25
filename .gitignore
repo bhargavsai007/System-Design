@@ -1,7 +1,21 @@
 ### IntelliJ IDEA ###
+.idea/
+*.iml
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+
+### Java ###
+*.class
+*.jar
+*.war
+
+### Maven ###
+target/
+
+### Gradle ###
+.gradle/
+gradle/
 
 ### Eclipse ###
 .apt_generated
@@ -25,5 +39,6 @@ bin/
 ### VS Code ###
 .vscode/
 
-### Mac OS ###
+### OS ###
 .DS_Store
+Thumbs.db
