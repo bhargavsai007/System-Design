@@ -1,0 +1,30 @@
+# Maven
+target/
+.m2/
+
+# IDE
+.idea/
+*.iml
+out/
+*.class
+*.jar
+*.war
+*.rar
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+*.log
+*.swp
+*.swo
+*~
+.classpath
+.project
+.settings/
+
+# Build artifacts
+dist/
+build/
+
