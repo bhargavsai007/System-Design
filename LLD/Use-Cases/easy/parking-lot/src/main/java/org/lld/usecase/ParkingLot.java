@@ -27,7 +27,7 @@ public class ParkingLot {
         this.activeTickets = new HashMap<>();
     }
 
-    public ParkingTicket parkVehicle(Vehicle vehicle){
+    public synchronized ParkingTicket parkVehicle(Vehicle vehicle){
 
         Optional<ParkingSpot> parkingSpot = parkingStrategy.getParkingSpot(parkingFloors, vehicle);
 
@@ -44,7 +44,7 @@ public class ParkingLot {
         }
     }
 
-    public void unParkVehicle(ParkingTicket parkingTicket){
+    public synchronized void unParkVehicle(ParkingTicket parkingTicket){
 
         ParkingSpot parkingSpot = parkingTicket.getParkingSpot();
         parkingSpot.unParkVehicle(parkingTicket);
