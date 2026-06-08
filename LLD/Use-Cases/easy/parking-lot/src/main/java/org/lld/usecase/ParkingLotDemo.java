@@ -15,21 +15,17 @@ class ParkingLotDemo {
 
     public static void main(String[] args) {
 
-        List<ParkingFloor>parkingFloors = new ArrayList<>();
+        ParkingLot parkingLot = new ParkingLot(new NearestFirstStrategy(), new FlatRateFeeStrategy(10));
 
         for(int i=0; i<NUMBER_OF_FLOORS; i++){
 
-            Map<String, ParkingSpot> parkingSpotMap = new HashMap<>();
             List<ParkingSpot> parkingSpots = getParkingSpots(i);
+            ParkingFloor parkingFloor = new ParkingFloor(i);
 
-            for(ParkingSpot parkingSpot: parkingSpots){
-                parkingSpotMap.put(parkingSpot.getSpotId(), parkingSpot);
-            }
+            parkingSpots.forEach(parkingFloor::addParkingSpot);
 
-            parkingFloors.add(new ParkingFloor(i, parkingSpotMap));
+            parkingLot.addFloor(parkingFloor);
         }
-
-        ParkingLot parkingLot = new ParkingLot(parkingFloors, new NearestFirstStrategy(), new FlatRateFeeStrategy(10));
 
         Vehicle bike1 = new Bike("AP16EH4583");
         Vehicle car1 = new Car("AP16EH4584");
@@ -45,10 +41,11 @@ class ParkingLotDemo {
 
         parkingLot.unParkVehicle(truckParkingTicket);
 
-        parkingLot.parkVehicle(truck2);
+        ParkingTicket truck2ParkingTicket = parkingLot.parkVehicle(truck2);
 
         truckParkingTicket = parkingLot.parkVehicle(truck1);
 
+        ParkingTicket car2ParkingTicket = parkingLot.parkVehicle(car2);
     }
 
     private static List<ParkingSpot> getParkingSpots(int floorNumber) {

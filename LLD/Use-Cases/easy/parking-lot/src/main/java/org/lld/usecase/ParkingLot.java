@@ -9,10 +9,7 @@ import org.lld.usecase.entity.Vehicle;
 import org.lld.usecase.service.ParkingFeeStrategy;
 import org.lld.usecase.service.ParkingStrategy;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Data
 @Slf4j
@@ -23,8 +20,8 @@ public class ParkingLot {
     private ParkingFeeStrategy parkingFeeStrategy;
     private Map<String, ParkingTicket> activeTickets;
 
-    public ParkingLot(List<ParkingFloor> parkingFloors, ParkingStrategy parkingStrategy, ParkingFeeStrategy parkingFeeStrategy) {
-        this.parkingFloors = parkingFloors;
+    public ParkingLot(ParkingStrategy parkingStrategy, ParkingFeeStrategy parkingFeeStrategy) {
+        this.parkingFloors = new ArrayList<>();
         this.parkingStrategy = parkingStrategy;
         this.parkingFeeStrategy = parkingFeeStrategy;
         this.activeTickets = new HashMap<>();

@@ -1,19 +1,22 @@
 package org.lld.usecase.entity;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 @Data
+@Slf4j
 public class ParkingFloor {
 
     private int floorNumber;
     private Map<String, ParkingSpot> parkingSpots;
 
-    public ParkingFloor(int floorNumber, Map<String, ParkingSpot> parkingSpots) {
+    public ParkingFloor(int floorNumber) {
         this.floorNumber = floorNumber;
-        this.parkingSpots = parkingSpots;
+        this.parkingSpots = new HashMap<>();
     }
 
     public int numberOfAvailableSpots() {
@@ -39,6 +42,15 @@ public class ParkingFloor {
 
     public void addParkingSpot(ParkingSpot parkingSpot) {
         parkingSpots.put(parkingSpot.getSpotId(), parkingSpot);
+    }
+
+    public void removeParkingSpot(ParkingSpot parkingSpot) {
+
+        if (parkingSpot.isOccupied() || !parkingSpots.containsKey(parkingSpot.getSpotId())) {
+            log.info("Cannot remove parking spot: {}. It is either occupied or does not exist.", parkingSpot.getSpotId());
+            return;
+        }
+        parkingSpots.remove(parkingSpot.getSpotId());
     }
 
 }

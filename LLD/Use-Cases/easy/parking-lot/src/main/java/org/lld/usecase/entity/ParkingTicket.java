@@ -22,6 +22,6 @@ public class ParkingTicket {
     }
 
     public void setExitTime() {
-        this.exitTime = new Date().getTime();
+        this.exitTime = new Date().getTime()+2*60*60*1000; // adding 2 hours to entry time for testing purpose
     }
 }
